@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'ÉLIXIR PARFUMS — Haute Parfumerie & Niche Scents</title>
+  
+  <!-- Google Fonts: Playfair Display + Plus Jakarta Sans + Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+  <!-- Fon animatsiyasi (oltin zarralar va nurli doiralar) -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Yuqori e'lon paneli (Announcement bar) -->
+  <aside class="top-announcement" aria-label="E'lonlar">
+    <div class="container marquee-content">
+      <span class="announcement-item">⚜️ <strong>L'ÉLIXIR PARFUMS</strong> — 30% Fransuz moylari asosidagi asl nish atirlar</span>
+      <span class="announcement-sep">•</span>
+      <span class="announcement-item">🚚 150 000 so'mdan oshgan xaridlarga <strong>BEPUL YETKAZIB BERISH</strong></span>
+      <span class="announcement-sep">•</span>
+      <span class="announcement-item">⏳ 12-18 soat yuqori turg'unlik kafolati</span>
+      <span class="announcement-sep">•</span>
+      <span class="announcement-item">🧪 10 ml, 50 ml va 100 ml shishalarda</span>
+    </div>
+  </aside>
+
+  <!-- Asosiy navigatsiya paneli (Navbar) -->
+  <header class="navbar" id="main-navbar">
+    <div class="container nav-content">
+      
+      <!-- Brend / Logo -->
+      <a href="#" class="brand-link" onclick="resetFilters(); return false;">
+        <div class="brand-emblem">⚜️</div>
+        <div class="brand-text">
+          <span class="brand-title">L'ÉLIXIR</span>
+          <span class="brand-subtitle">PARFUMERIE • TASHKENT</span>
+        </div>
+      </a>
+
+      <!-- Markaziy qidiruv maydoni (Desktop) -->
+      <div class="nav-search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="global-search-input" 
+          placeholder="Atir nomi, brendi (masalan: Tom Ford, Sauvage, Baccarat, Aventus)..." 
+          oninput="handleSearch(this.value)"
+          autocomplete="off"
+        >
+        <button id="clear-search-btn" class="clear-search" onclick="clearSearch()" title="Tozalash">✕</button>
+      </div>
+
+      <!-- O'ng tarafdagi boshqaruv tugmalari -->
+      <div class="nav-actions">
+        <!-- Rejimni o'zgartirish (Dark / Light) -->
+        <button id="theme-toggle" class="nav-icon-btn" onclick="toggleTheme()" title="Mavzuni almashtirish">
+          <span class="theme-icon">☀️</span>
+          <span class="theme-text">Oq rejim</span>
+        </button>
+
+        <!-- Sevimlilar (Wishlist) -->
+        <button id="wishlist-btn" class="nav-icon-btn" onclick="filterByWishlist()" title="Sevimlilar">
+          <span class="heart-icon">❤️</span>
+          <span class="action-label">Sevimlilar</span>
+          <span id="wishlist-count" class="badge-count">0</span>
+        </button>
+
+        <!-- Savat tugmasi -->
+        <button class="cart-btn" onclick="openCart()" title="Savatni ko'rish">
+          <span class="cart-icon">🛍️</span>
+          <span class="cart-text">Savat</span>
+          <span id="cart-count" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner: Yuqori hashamatli taqdimot bo'limi (Saytga kirishdagi shiroyli rasm va ko'rgazma) -->
+  <section class="hero-section" id="hero">
+    <div class="hero-ambient-glow"></div>
+    <div class="container hero-container-split">
+      
+      <!-- Chap ustun: Asosiy sarlavha, afzalliklar va harakat tugmalari -->
+      <div class="hero-text-col">
+        <div class="hero-badge">
+          <span class="sparkle-icon">⚜️</span> HAUTE PARFUMERIE • 42 TA ASL DURDONA
+        </div>
+        
+        <h1 class="hero-title">
+          Har bir ifor — <br>
+          <span class="gold-gradient-text">o'z o'rnida va beqiyos</span>
+        </h1>
+        
+        <p class="hero-desc">
+          Dunyoning eng sara parfyumeriya uylari: <strong>Tom Ford, Creed, Dior, Chanel, MFK, Kilian, Louis Vuitton, Xerjoff</strong>. 
+          30% toza fransuz moylari bilan <strong>10 ml</strong>, <strong>50 ml</strong> va <strong>100 ml</strong> hajmlarda, 12-18 soatlik boy va maftunkor shleyf bilan.
+        </p>
+
+        <!-- CTA tugmalari -->
+        <div class="hero-cta-group">
+          <a href="#product-list" class="hero-btn-primary" onclick="smoothScrollToCatalog(event)">
+            <span>🛍️ Katalogni ko'rish</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <button class="hero-btn-secondary" onclick="filterByBrand('Tom Ford', document.querySelector('.brands-scrollable .brand-chip:nth-child(2)'))">
+            <span>👑 Top Brendlar</span>
+          </button>
+        </div>
+
+        <!-- Ishonch ko'rsatkichlari (Trust badges) -->
+        <div class="hero-trust-bar">
+          <div class="trust-item">
+            <span class="trust-stars">★★★★★</span>
+            <span class="trust-label">4.9/5 (1 250+ xaridor)</span>
+          </div>
+          <span class="trust-dot">•</span>
+          <div class="trust-item">
+            <span class="trust-icon">🚚</span>
+            <span class="trust-label">150 000 so'mdan bepul yetkazish</span>
+          </div>
+          <span class="trust-dot">•</span>
+          <div class="trust-item">
+            <span class="trust-icon">🧪</span>
+            <span class="trust-label">Extrait de Parfum</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- O'ng ustun: Saytga kirishdagi shiroyli rasm (Hashamatli Atir Ko'rgazmasi) -->
+      <div class="hero-visual-col">
+        <div class="hero-showcase-card">
+          <!-- Oltin nurli aura -->
+          <div class="showcase-glow"></div>
+          
+          <!-- Rasm maydoni -->
+          <div class="showcase-image-wrap">
+            <div class="showcase-top-tag">
+              <span class="sparkle-icon">✨</span> HAUTE SÉLECTION 2026
+            </div>
+            
+            <img 
+              id="hero-main-img" 
+              src="" 
+              alt="L'ÉLIXIR Haute Parfumerie" 
+              class="hero-showcase-img"
+              onerror="handleImgError(this, 9)"
+            >
+
+            <!-- Suzuvchi ma'lumot kartochkasi (Floating Glass Badge) -->
+            <div class="floating-perfume-badge" onclick="openDetailModal(9)" title="Batafsil ko'rish">
+              <div class="fpb-thumb">
+                <img src="" alt="Baccarat Rouge 540" onerror="handleImgError(this, 9)">
+              </div>
+              <div class="fpb-info">
+                <span class="fpb-subtitle">🔥 Bestseller N1</span>
+                <strong class="fpb-title">Baccarat Rouge 540 Extrait</strong>
+                <span class="fpb-price">130 000 so'm (50 ml)</span>
+              </div>
+              <span class="fpb-action-icon">→</span>
+            </div>
+          </div>
+
+          <!-- Hero pastidagi tezkor tanlov (Thumbnails) -->
+          <div class="showcase-selectors">
+            <button class="showcase-thumb active" onclick="switchHeroShowcase(0, this)" title="Baccarat Rouge 540 Extrait">
+              <span>💎 Baccarat 540</span>
+            </button>
+            <button class="showcase-thumb" onclick="switchHeroShowcase(1, this)" title="Tom Ford Lost Cherry">
+              <span>🍒 Lost Cherry</span>
+            </button>
+            <button class="showcase-thumb" onclick="switchHeroShowcase(2, this)" title="Creed Aventus">
+              <span>👑 Creed Aventus</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tezkor afzalliklar kartalari (Hero Features) -->
+    <div class="container">
+      <div class="hero-features">
+        <div class="feature-card">
+          <div class="feature-icon">💎</div>
+          <div class="feature-text">
+            <strong>30% Moy konsentratsiyasi</strong>
+            <span>Fransiya Extrait de Parfum</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⏳</div>
+          <div class="feature-text">
+            <strong>12-18 Soat turg'unlik</strong>
+            <span>Boy va maftunkor shleyf</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <div class="feature-text">
+            <strong>Tez yetkazib berish</strong>
+            <span>150 000 so'mdan bepul</span>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧪</div>
+          <div class="feature-text">
+            <strong>3 Xil hajm</strong>
+            <span>10ml, 50ml va 100ml</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Asosiy do'kon qismi -->
+  <main class="container main-content">
+    
+    <!-- Filtr va Qidiruv boshqaruv paneli -->
+    <div class="store-controls-card">
+      
+      <!-- Mobil qidiruv qatori -->
+      <div class="mobile-search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="mobile-search-input" 
+          placeholder="Atir nomi, brend yoki nota qidirish..." 
+          oninput="handleSearch(this.value)"
+        >
+      </div>
+
+      <!-- 1. Kategoriya va Jins tugmalari (Tabs) -->
+      <div class="control-row">
+        <div class="row-label">Toifalar:</div>
+        <div class="categories-tabs" role="tablist">
+          <button class="filter-tab active" data-cat="Hammasi" onclick="filterCategory('Hammasi', this)">
+            <span>✦ Barcha atirlar</span>
+            <span class="tab-count" id="count-all">0</span>
+          </button>
+          <button class="filter-tab" data-cat="Niche" onclick="filterCategory('Niche', this)">
+            <span>👑 Niche & Selektiv</span>
+          </button>
+          <button class="filter-tab" data-cat="Erkaklar" onclick="filterCategory('Erkaklar', this)">
+            <span>🎩 Erkaklar uchun</span>
+          </button>
+          <button class="filter-tab" data-cat="Ayollar" onclick="filterCategory('Ayollar', this)">
+            <span>💃 Ayollar uchun</span>
+          </button>
+          <button class="filter-tab" data-cat="Unisex" onclick="filterCategory('Unisex', this)">
+            <span>🌿 Unisex</span>
+          </button>
+          <button class="filter-tab wishlist-tab" data-cat="Wishlist" onclick="filterByWishlist(this)">
+            <span>❤️ Sevimlilarim</span>
+            <span class="tab-count wishlist-tab-count" id="tab-wishlist-count">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Brendlar bo'yicha tezkor saralash (Brand Pills) -->
+      <div class="control-row brands-row">
+        <div class="row-label">Brendlar:</div>
+        <div class="brands-scrollable" id="brands-bar">
+          <button class="brand-chip active" onclick="filterByBrand('Hammasi', this)">Barchasi</button>
+          <button class="brand-chip" onclick="filterByBrand('Tom Ford', this)">Tom Ford</button>
+          <button class="brand-chip" onclick="filterByBrand('Christian Dior', this)">Christian Dior</button>
+          <button class="brand-chip" onclick="filterByBrand('Creed', this)">Creed</button>
+          <button class="brand-chip" onclick="filterByBrand('Maison Francis Kurkdjian', this)">Maison Francis Kurkdjian</button>
+          <button class="brand-chip" onclick="filterByBrand('Kilian', this)">Kilian</button>
+          <button class="brand-chip" onclick="filterByBrand('Chanel', this)">Chanel</button>
+          <button class="brand-chip" onclick="filterByBrand('Louis Vuitton', this)">Louis Vuitton</button>
+          <button class="brand-chip" onclick="filterByBrand('Xerjoff', this)">Xerjoff</button>
+          <button class="brand-chip" onclick="filterByBrand('Yves Saint Laurent', this)">YSL</button>
+          <button class="brand-chip" onclick="filterByBrand('Ex Nihilo', this)">Ex Nihilo</button>
+          <button class="brand-chip" onclick="filterByBrand('Bvlgari', this)">Bvlgari</button>
+          <button class="brand-chip" onclick="filterByBrand('Boshqa', this)">Boshqa Niche</button>
+        </div>
+      </div>
+
+      <!-- 3. Ifor turi (Scent Notes) qatori -->
+      <div class="control-row scent-row">
+        <div class="row-label">Ifor xarakteri:</div>
+        <div class="scents-scrollable" id="scent-bar">
+          <button class="scent-chip active" onclick="filterByScent('Hammasi', this)">Barcha hidlar</button>
+          <button class="scent-chip" onclick="filterByScent('Shirin', this)">🍇 Shirin & Mevali</button>
+          <button class="scent-chip" onclick="filterByScent('Sitrus', this)">🍋 Tetik & Sitrusli</button>
+          <button class="scent-chip" onclick="filterByScent('Yogoch', this)">🪵 Yog'ochli & Tutunli</button>
+          <button class="scent-chip" onclick="filterByScent('Gulli', this)">🌸 Gulli & Mayin</button>
+          <button class="scent-chip" onclick="filterByScent('Sharqona', this)">⚜️ Sharqona & Amber</button>
+        </div>
+      </div>
+
+      <!-- Qo'shimcha saralash va filtrlar qatori -->
+      <div class="filter-subbar">
+        <div class="results-stats">
+          Ko'rsatilmoqda: <span id="displayed-count" class="highlight-stat">0</span> ta saralangan atir
+          <span id="active-filter-indicator" class="active-filter-badge" style="display:none;"></span>
+        </div>
+
+        <div class="subbar-controls">
+          <!-- Saralash (Sort) -->
+          <div class="select-wrapper">
+            <label for="sort-select" class="select-label">Saralash:</label>
+            <select id="sort-select" onchange="handleSort(this.value)">
+              <option value="popular">🔥 Eng ommabop</option>
+              <option value="price-asc">📈 Narx: Arzondan qimmatga</option>
+              <option value="price-desc">📉 Narx: Qimmatdan arzonga</option>
+              <option value="name-asc">🔤 Nomi (A - Z)</option>
+              <option value="brand-asc">🏷️ Brend bo'yicha</option>
+              <option value="rating-desc">⭐ Reyting bo'yicha</option>
+            </select>
+          </div>
+
+          <!-- Hajm bo'yicha tezkor ko'rinish -->
+          <div class="select-wrapper">
+            <label for="volume-filter-select" class="select-label">Hajm narxi:</label>
+            <select id="volume-filter-select" onchange="handleGlobalVolumeChange(this.value)">
+              <option value="50ml">50 ml (Standart)</option>
+              <option value="10ml">10 ml (Sayohat)</option>
+              <option value="100ml">100 ml (Maksimal)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mahsulotlar kartochkalari konteyneri -->
+    <section id="product-list" class="perfume-grid" aria-label="Atirlar katalogi">
+      <!-- JavaScript orqali dinamik yaratiladi -->
+    </section>
+
+    <!-- Bo'sh natija holati -->
+    <div id="no-results" class="no-results-box" style="display: none;">
+      <div class="no-results-icon">🔍</div>
+      <h3>Hech qanday atir topilmadi</h3>
+      <p>Iltimos, boshqa so'z bilan qidirib ko'ring yoki filtrlarni tozalang.</p>
+      <button class="reset-filter-btn" onclick="resetFilters()">Barcha atirlarni ko'rish</button>
+    </div>
+
+    <!-- Parfyumeriya bo'yicha ma'lumot va afzalliklar bo'limi -->
+    <section class="info-section">
+      <div class="info-header">
+        <span class="info-subtitle">HAUTE PARFUMERIE STANDARTLARI</span>
+        <h2 class="info-title">Nega aynan <strong>L'ÉLIXIR PARFUMS</strong>?</h2>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-box">
+          <div class="info-box-icon">🧪</div>
+          <h3>30% Moy konsentratsiyasi nima?</h3>
+          <p>Oddiy do'kon atirlarida (Eau de Toilette) moy miqdori 8-12% bo'ladi. Bizning mahsulotlarimizda 30% toza Fransuz moyi mavjud, bu esa Extrait de Parfum standartiga to'liq javob beradi.</p>
+        </article>
+        
+        <article class="info-box">
+          <div class="info-box-icon">⏳</div>
+          <h3>Turg'unlik va shleyf kafolati</h3>
+          <p>Bizning atirlar terida 5 soatdan 18 soatgacha, kiyimlarda esa 48 soatgacha o'zining jozibador notalarini yo'qotmaydi. Atrofingizdagilar darhol payqaydigan boy shleyf.</p>
+        </article>
+
+        <article class="info-box">
+          <div class="info-box-icon">📦</div>
+          <h3>Hajmlar va qulay narxlar</h3>
+          <p>Siz o'zingizga qulay hajmda xarid qilishingiz mumkin: <strong>10 ml</strong> cho'ntakbop sinov shishasi, <strong>50 ml</strong> eng ommabop format yoki <strong>100 ml</strong> katta hajm.</p>
+        </article>
+
+        <article class="info-box">
+          <div class="info-box-icon">🚚</div>
+          <h3>Tez va Bepul yetkazib berish</h3>
+          <p>Toshkent shahri bo'yicha 24 soat ichida, viloyatlarga esa EMU pochta orqali tezkor yetkazib beriladi. 150 000 so'mdan yuqori buyurtmalar butun O'zbekiston bo'ylab mutlaqo bepul!</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================== -->
+  <!-- TO'LIQ MA'LUMOT MODAL OYNASI (PRODUCT DETAIL)  -->
+  <!-- ============================================== -->
+  <div id="detail-modal" class="modal-overlay" onclick="closeDetailOutside(event)" aria-hidden="true">
+    <div class="detail-modal-box">
+      <button class="modal-close-icon" onclick="closeDetailModal()" title="Yopish">✕</button>
+
+      <div class="detail-grid">
+        <!-- Chap: Katta rasm va belgilar -->
+        <div class="detail-media">
+          <div class="detail-img-container">
+            <span id="detail-gender-badge" class="modal-badge">Unisex</span>
+            <span id="detail-conc-badge" class="modal-badge-conc">Extrait de Parfum (30% Moy)</span>
+            <img id="detail-img" src="" alt="Atir rasmi" loading="lazy">
+          </div>
+
+          <!-- Rasm yuklash va asliga qaytarish boshqaruvi -->
+          <div class="detail-img-actions">
+            <label class="btn-change-img" title="Ushbu atir uchun o'z rasmingizni yuklang">
+              <span>📷</span> Yangi rasm yuklash
+              <input type="file" id="perfume-img-upload" accept="image/*" style="display: none;" onchange="handleUserImageUpload(event)">
+            </label>
+            <button type="button" id="btn-reset-img" class="btn-reset-img" onclick="resetPerfumeImage()" title="Standart hashamatli shisha san'atiga qaytarish">↺ Asliga qaytarish</button>
+          </div>
+          
+          <div class="detail-highlights">
+            <div class="highlight-item">
+              <span class="hl-icon">⏳</span>
+              <div>
+                <strong>Turg'unlik</strong>
+                <span id="detail-longevity">12-16 soat</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="hl-icon">💨</span>
+              <div>
+                <strong>Shleyf</strong>
+                <span id="detail-sillage">Kuchli, sezilarli</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="hl-icon">🍂</span>
+              <div>
+                <strong>Mavsum</strong>
+                <span id="detail-season">Barcha fasllar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- O'ng: To'liq tavsif, notalar, hajm va xarid -->
+        <div class="detail-content">
+          <div class="detail-header-info">
+            <span id="detail-brand" class="detail-brand-name">BRAND</span>
+            <h2 id="detail-title" class="detail-title">Perfume Name</h2>
+            
+            <div class="detail-rating-row">
+              <div class="stars-wrap">★★★★★</div>
+              <span id="detail-rating-text" class="rating-val">4.9</span>
+              <span class="reviews-count">(180+ mamnun xaridorlar)</span>
+            </div>
+          </div>
+
+          <!-- Narx bloki -->
+          <div class="detail-price-box">
+            <div class="price-labels">
+              <span class="price-caption">Tanlangan hajm narxi:</span>
+              <div class="price-value-wrap">
+                <span id="detail-current-price" class="modal-price">0 so'm</span>
+                <span id="detail-old-price" class="modal-old-price"></span>
+              </div>
+            </div>
+            <span class="stock-status">✓ Omborda mavjud</span>
+          </div>
+
+          <!-- Hajm tanlash (10ml, 50ml, 100ml) -->
+          <div class="volume-selector-section">
+            <label class="selector-title">Hajmni tanlang:</label>
+            <div class="volume-pill-group" id="detail-volume-pills">
+              <!-- JS orqali yaratiladi -->
+            </div>
+          </div>
+
+          <!-- Tavsif matni -->
+          <div class="detail-desc-box">
+            <h4>Ifor haqida:</h4>
+            <p id="detail-desc"></p>
+          </div>
+
+          <!-- Ifor Piramidasi (Notalar) -->
+          <div class="fragrance-pyramid">
+            <h4>🌿 Ifor Piramidasi (Notalar):</h4>
+            <div class="pyramid-levels">
+              <div class="pyramid-item top-notes">
+                <span class="note-level-label">Yuqori notalar:</span>
+                <span id="detail-top-notes" class="notes-text"></span>
+              </div>
+              <div class="pyramid-item heart-notes">
+                <span class="note-level-label">Yurak notalari:</span>
+                <span id="detail-heart-notes" class="notes-text"></span>
+              </div>
+              <div class="pyramid-item base-notes">
+                <span class="note-level-label">Baza notalari:</span>
+                <span id="detail-base-notes" class="notes-text"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Harakat tugmalari -->
+          <div class="detail-actions">
+            <!-- Soni -->
+            <div class="quantity-picker">
+              <button class="qty-change-btn" onclick="adjustDetailQty(-1)">-</button>
+              <span id="detail-qty-val">1</span>
+              <button class="qty-change-btn" onclick="adjustDetailQty(1)">+</button>
+            </div>
+
+            <!-- Savatga qo'shish -->
+            <button id="detail-add-btn" class="modal-add-cart-btn" onclick="addCurrentDetailToCart()">
+              <span>🛍️ Savatga qo'shish</span>
+            </button>
+
+            <!-- Sevimlilarga qo'shish (Like) -->
+            <button id="detail-like-btn" class="modal-like-btn" onclick="toggleDetailLike()" title="Sevimlilarga qo'shish">
+              <span class="modal-like-heart">🤍</span>
+            </button>
+          </div>
+
+          <!-- 1 klikda Telegram orqali xarid qilish -->
+          <button class="fast-telegram-btn" onclick="orderCurrentViaTelegram()">
+            <span>✈️ 1-klikda Telegram orqali xarid</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- SAVAT VA TO'LOV OYNASI (CART & CHECKOUT)      -->
+  <!-- ============================================== -->
+  <div id="cart-modal" class="modal-overlay" onclick="closeCartOutside(event)" aria-hidden="true">
+    <div class="cart-modal-box">
+      
+      <div class="cart-modal-header">
+        <div class="cart-title-wrap">
+          <h2>🛍️ Sizning savatingiz</h2>
+          <span id="cart-items-total-badge" class="badge-tag">0 ta mahsulot</span>
+        </div>
+        <button class="modal-close-icon" onclick="closeCart()">✕</button>
+      </div>
+
+      <!-- Bepul yetkazib berish progress paneli -->
+      <div class="shipping-progress-container">
+        <div class="shipping-text" id="shipping-progress-text">
+          150 000 so'mgacha yana xarid qiling va bepul yetkazib berishga ega bo'ling!
+        </div>
+        <div class="progress-bar-bg">
+          <div id="shipping-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Savatdagi mahsulotlar ro'yxati -->
+      <div id="cart-items" class="cart-items-scrollable">
+        <!-- Dinamik JS -->
+      </div>
+
+      <!-- To'lov va buyurtma rasmiylashtirish qismi -->
+      <div id="checkout-section" class="cart-checkout-container">
+        
+        <div class="price-breakdown">
+          <div class="price-row">
+            <span>Mahsulotlar summasi:</span>
+            <span id="cart-subtotal">0 so'm</span>
+          </div>
+          <div class="price-row">
+            <span>Yetkazib berish:</span>
+            <span id="cart-shipping-fee">30 000 so'm</span>
+          </div>
+          <div class="price-row total-highlight">
+            <strong>Jami to'lov:</strong>
+            <strong id="cart-grand-total">0 so'm</strong>
+          </div>
+        </div>
+
+        <form id="payment-form" class="luxury-form" onsubmit="processPayment(event)">
+          <div class="form-group">
+            <label for="customer-name">Sizning ismingiz:</label>
+            <input type="text" id="customer-name" placeholder="Masalan: Jasur Aliyev" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customer-phone">Telefon raqamingiz:</label>
+            <input type="tel" id="customer-phone" placeholder="+998 90 123 45 67" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customer-city">Yetkazib berish manzili:</label>
+            <input type="text" id="customer-city" placeholder="Shahar, tuman, ko'cha va uy raqami" required>
+          </div>
+
+          <div class="form-group">
+            <label for="payment-method">To'lov turi:</label>
+            <select id="payment-method" required>
+              <option value="Naqd pul">💵 Naqd pul (qabul qilganda)</option>
+              <option value="Click / Payme">📱 Click / Payme ilovalari orqali</option>
+              <option value="Uzcard / Humo">💳 Karta orqali to'lov (terminal)</option>
+            </select>
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="confirm-order-btn">
+              <span>Buyurtmani tasdiqlash</span>
+            </button>
+            <button type="button" class="order-tg-btn" onclick="sendCartOrderToTelegram()">
+              <span>✈️ Telegram orqali yuborish</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Buyurtma muvaffaqiyatli qabul qilinganligi haqida modal -->
+  <div id="success-modal" class="modal-overlay" onclick="closeSuccessOutside(event)" aria-hidden="true">
+    <div class="success-box">
+      <div class="success-icon">⚜️</div>
+      <h2 class="gold-gradient-text">Buyurtmangiz qabul qilindi!</h2>
+      <p id="success-message">Tez orada operatorimiz siz bilan bog'lanadi.</p>
+      
+      <div id="order-receipt" class="order-receipt-card">
+        <!-- Dinamik chek -->
+      </div>
+
+      <button class="close-success-btn" onclick="closeSuccessModal()">Davom etish</button>
+    </div>
+  </div>
+
+  <!-- Toast bildirishnomasi -->
+  <div id="toast" class="luxury-toast" role="alert" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span id="toast-message" class="toast-text">Mahsulot savatga qo'shildi!</span>
+  </div>
+
+  <!-- Sayt pastki qismi (Footer) -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand-link">
+          <div class="brand-emblem">⚜️</div>
+          <div class="brand-text">
+            <span class="brand-title">L'ÉLIXIR</span>
+            <span class="brand-subtitle">PARFUMERIE • HAUTE QUALITÉ</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          Biz mashhur jahon brendlari motivlari asosida 30% Fransuz parfyum moylari bilan boyitilgan, yuqori turg'unlikka ega hashamatli atirlarni Toshkent va butun O'zbekiston bo'ylab yetkazib beramiz.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hajmlar</h4>
+        <ul>
+          <li><a href="#" onclick="handleGlobalVolumeChange('10ml'); return false;">10 ml — Sayohat formati</a></li>
+          <li><a href="#" onclick="handleGlobalVolumeChange('50ml'); return false;">50 ml — Standart shisha</a></li>
+          <li><a href="#" onclick="handleGlobalVolumeChange('100ml'); return false;">100 ml — Katta hajm</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Top Brendlar</h4>
+        <ul>
+          <li><a href="#" onclick="filterByBrand('Tom Ford'); return false;">Tom Ford</a></li>
+          <li><a href="#" onclick="filterByBrand('Christian Dior'); return false;">Christian Dior</a></li>
+          <li><a href="#" onclick="filterByBrand('Creed'); return false;">Creed</a></li>
+          <li><a href="#" onclick="filterByBrand('Maison Francis Kurkdjian'); return false;">MFK Parfums</a></li>
+          <li><a href="#" onclick="filterByBrand('Kilian'); return false;">By Kilian</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Bog'lanish</h4>
+        <p class="contact-info">📍 Toshkent shahri, Mirobod tumani</p>
+        <p class="contact-info">📞 +998 (90) 000-00-00</p>
+        <p class="contact-info">✈️ Telegram: @lelixir_parfums</p>
+        <p class="contact-info">⏰ Ish vaqti: 09:00 — 22:00 (Har kuni)</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 L'ÉLIXIR PARFUMS. Barcha huquqlar himoyalangan. Tamam.uz uslubidagi yuqori sifatli 30% fransuz parfyumeriyasi.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
